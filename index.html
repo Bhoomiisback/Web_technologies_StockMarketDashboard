@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantDash - Trading Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-icon">
+                    <span class="q-letter">Q</span>
+                    <div class="logo-pulse"></div>
+                </div>
+                <span class="nav-brand">QuantDash</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="nav-link" onclick="showMyStocks()">
+                    <i class="fas fa-chart-line"></i>
+                    <span>My Stocks</span>
+                </a>
+                <a href="login.html" class="nav-link" id="userLink">
+                    <i class="fas fa-user"></i>
+                    <span id="userText">Login</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <span class="q-letter">Q</span>
+                        <div class="logo-pulse"></div>
+                    </div>
+                    <div class="logo-text">
+                        <h1>QuantDash</h1>
+                        <p class="tagline">Real-Time Trading Intelligence</p>
+                    </div>
+                </div>
+                <div class="time" id="currentTime"></div>
+            </div>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon blue"><i class="fas fa-dollar-sign"></i></div>
+                <div class="stat-label">Portfolio Value</div>
+                <div class="stat-value" id="portfolioValue">$0.00</div>
+                <div class="stat-change positive"><i class="fas fa-arrow-up"></i> <span id="portfolioChange">+0.00%</span></div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" id="profitLossIcon"><i class="fas fa-chart-line"></i></div>
+                <div class="stat-label">Total P/L</div>
+                <div class="stat-value" id="totalProfitLoss">$0.00</div>
+                <div class="stat-change" id="profitLossPercent"><i class="fas fa-arrow-up"></i> <span>+0.00%</span></div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon green"><i class="fas fa-chart-bar"></i></div>
+                <div class="stat-label">Volume</div>
+                <div class="stat-value" id="volume">142.5M</div>
+                <div class="stat-change positive"><i class="fas fa-arrow-up"></i> <span id="volumeChange">+5.2%</span></div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon purple"><i class="fas fa-briefcase"></i></div>
+                <div class="stat-label">Holdings</div>
+                <div class="stat-value" id="totalHoldings">0</div>
+                <div class="stat-change positive"><i class="fas fa-star"></i> <span id="holdingsText">Stocks</span></div>
+            </div>
+        </div>
+
+        <div class="stocks-section">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-star"></i> My Watchlist</h2>
+                <button class="add-stock-btn" onclick="toggleAddStockModal()">
+                    <i class="fas fa-plus"></i> Add Stock
+                </button>
+            </div>
+            <div id="stocksList"></div>
+            <div class="loading-bar"></div>
+        </div>
+
+        <div class="stocks-section" style="margin-top: 30px;">
+            <h2 class="section-title"><i class="fas fa-chart-line"></i> Available Stocks</h2>
+            <div id="availableStocksList"></div>
+        </div>
+
+        <!-- Add Stock Modal -->
+        <div id="addStockModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-plus-circle"></i> Add Stock to Watchlist</h2>
+                    <span class="close-btn" onclick="toggleAddStockModal()">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Stock Symbol</label>
+                        <select id="stockSymbolSelect">
+                            <option value="">Select a stock...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Quantity (Shares)</label>
+                        <input type="number" id="quantityInput" placeholder="Enter quantity" min="1" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label>Purchase Price ($)</label>
+                        <input type="number" id="purchasePriceInput" placeholder="Enter purchase price" step="0.01" min="0">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-cancel" onclick="toggleAddStockModal()">Cancel</button>
+                    <button class="btn-add" onclick="addStockToWatchlist()">Add to Watchlist</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
